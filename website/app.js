@@ -11,16 +11,16 @@ generateBtn.addEventListener('click', submitAction);
 
 function submitAction(event) {
   event.preventDefault();
-    const zipCode = document.getElementById('zip').value;
-    const userResponse = document.getElementById('feel').value;
-    const apiUrl = 'https://api.openweathermap.org/data/2.5/weather';
-    const apiKey = '2d38ed591bea4bd6371075900633fb91';
+  const zipCode = document.getElementById('zip').value;
+  const userResponse = document.getElementById('feel').value;
+  const apiUrl = 'https://api.openweathermap.org/data/2.5/weather';
+  const apiKey = '2d38ed591bea4bd6371075900633fb91';
 
-    if (zipCode !== '' && userResponse !== '') {
-      getWeatherInforData(apiUrl, zipCode, apiKey, userResponse);
-    } else {
-      showError('You are missing zip Code or feeling')
-    }
+  if (zipCode !== '' && userResponse !== '') {
+    getWeatherInforData(apiUrl, zipCode, apiKey, userResponse);
+  } else {
+    showError('You are missing zip Code or feeling')
+  }
 }
 
 const showError = (errorMessage = '') => {
@@ -88,6 +88,6 @@ const updateDynamicUI = async () => {
       document.getElementById('user-response').innerHTML = weatherData.userResponse;
     }
   } catch (error) {
-      console.log('error', error);
+    console.log('error', error);
   }
 };
