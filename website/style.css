@@ -1,0 +1,108 @@
+
+body {
+  font-family: sans-serif;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+#app {
+  display: flex;
+  width: 40vw;
+  min-height: 50vw;
+  background: #f7f7f9;
+  color: #000000;
+  justify-content: center;
+  flex-direction: column;
+  padding: 16px;
+  border: 1px solid #e4dddd;
+}
+
+.entry {
+  background: #c0c4cc66;
+  grid-area: entry;
+  margin-bottom: 30px;
+  padding: 0px 16px;
+}
+
+form {
+  grid-area: form;
+  display: grid;
+  justify-content: center;
+  width: 50%;
+  margin: 0 auto;
+  grid-gap: 10px;
+  padding: 20px 0px;
+}
+
+#entryHolder {
+  padding: 15px;
+}
+
+#date::before {
+  content: "Date: ";
+}
+
+#temp::before {
+  content: "Outside temperature: ";
+}
+
+#content::before {
+  content: "You're feeling about weather: ";
+}
+
+.headline {
+  display: grid;
+  grid-area: headline;
+  align-self: center;
+  justify-content: center;
+}
+
+.title {
+  display: inline-flex;
+  margin-top: 10px;
+  justify-content: center;
+  align-self: center;
+  width: 100%;
+}
+
+label {
+  display: block;
+  margin: 8px 0;
+}
+
+input {
+  display: flex;
+  min-width: 10vw;
+  padding: 16px 8px;
+  border: 1px solid #e4dddd;
+}
+
+button {
+  background: #6f9bca;
+  border: 1px solid #e4dddd;
+  box-shadow: 2px 4px 5px #acacac;
+  border-radius: 8px;
+  padding: 12px;
+  min-width: 10vw;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 550;
+}
+
+button.invalid {
+  cursor: not-allowed;
+}
+
+textarea {
+  border: 1px solid #e4dddd;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
