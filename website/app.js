@@ -1,5 +1,3 @@
-
-
 const userInfo = document.getElementById('userInfo');
 const generateBtn = document.getElementById('generate');
 generateBtn.addEventListener('click', performAction);
@@ -22,13 +20,11 @@ function performAction(e) {
         generateBtn.classList.remove('invalid');
         getWeatherData(apiUrl, zipCode, apiKey)
             .then((data) => {
-                postData('/add', { temp: data.main.temp, date: newDate, feel: feel });
+              postUserInfoData('/add', { temp: data.main.temp, date: newDate, feel: feel });
             }).then(() => {
-                updateUI()
+              updateDynamicUI()
             }).catch((error) => {
-                console.log(error);
-                alert('The zip code is invalid. Try again');
-
+                alert('Please try again enter difference zip code!');
             });
         userInfo.reset();
     } else {
@@ -46,7 +42,7 @@ const getWeatherData = async(apiUrl, zipCode, apiKey) => {
 };
 
 /* POST method */
-const postData = async(url = '', data = {}) => {
+const postUserInfoData = async(url = '', data = {}) => {
     const response = await fetch(url, {
         method: 'POST',
         credentials: 'same-origin',
@@ -68,7 +64,7 @@ const postData = async(url = '', data = {}) => {
     }
 };
 
-const updateUI = async() => {
+const updateDynamicUI = async() => {
     const request = await fetch('/all');
     try {
         const allData = await request.json();
