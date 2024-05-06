@@ -21,3 +21,5 @@ To get the project up and running follow the steps below:
 
 ### Final Output
 ![Output](https://github.com/xinhho/Weather_Journal_App/blob/master/img/output.PNG)
+![Output](https://github.com/xinhho/Weather_Journal_App/blob/master/img/error1.PNG)
+![Output](https://github.com/xinhho/Weather_Journal_App/blob/master/img/error2.PNG)
