@@ -6,7 +6,7 @@ body {
   justify-content: center;
 }
 
-#app {
+.container {
   display: flex;
   width: 40vw;
   min-height: 50vw;
@@ -51,7 +51,7 @@ form {
   content: "You're feeling about weather: ";
 }
 
-.headline {
+.header {
   display: grid;
   grid-area: headline;
   align-self: center;
@@ -81,7 +81,6 @@ input {
 button {
   background: #6f9bca;
   border: 1px solid #e4dddd;
-  box-shadow: 2px 4px 5px #acacac;
   border-radius: 8px;
   padding: 12px;
   min-width: 10vw;
@@ -90,6 +89,7 @@ button {
   justify-content: center;
   align-items: center;
   font-weight: 550;
+  margin-top: 8px;
 }
 
 button.invalid {

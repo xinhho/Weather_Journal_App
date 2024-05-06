@@ -1,4 +1,4 @@
-const userInfo = document.getElementById('userInfo');
+const userInfo = document.getElementById('user-info');
 const generateBtn = document.getElementById('generate');
 generateBtn.addEventListener('click', performAction);
 
