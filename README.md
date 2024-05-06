@@ -1,9 +1,9 @@
 # Weather_Journal_App
 
-## Project 3 - Weather Journal App (Front End Developer Udacity Nanodegree)
+## Project 3 - Weather Journal App
 #### Technology used: HTML, CSS, Javascript
 
-# Steps to run locally
+### Steps to run locally
 
 To get the project up and running follow the steps below:
 `npm install`
