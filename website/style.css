@@ -18,52 +18,18 @@ body {
   border: 1px solid #e4dddd;
 }
 
-.entry {
-  background: #c0c4cc66;
-  grid-area: entry;
-  margin-bottom: 30px;
-  padding: 0px 16px;
+.header {
+  display: flex;
+  align-self: center;
+  justify-content: center;
 }
 
 form {
-  grid-area: form;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   width: 50%;
-  margin: 0 auto;
-  grid-gap: 10px;
   padding: 20px 0px;
-}
-
-#entryHolder {
-  padding: 15px;
-}
-
-#date::before {
-  content: "Date: ";
-}
-
-#temp::before {
-  content: "Outside temperature: ";
-}
-
-#content::before {
-  content: "You're feeling about weather: ";
-}
-
-.header {
-  display: grid;
-  grid-area: headline;
-  align-self: center;
-  justify-content: center;
-}
-
-.title {
-  display: inline-flex;
-  margin-top: 10px;
-  justify-content: center;
-  align-self: center;
-  width: 100%;
 }
 
 label {
@@ -76,6 +42,19 @@ input {
   min-width: 10vw;
   padding: 16px 8px;
   border: 1px solid #e4dddd;
+}
+
+textarea {
+  border: 1px solid #e4dddd;
+}
+
+#error {
+  color: red;
+}
+
+.infor {
+  background: #c0c4cc66;
+  padding: 16px;
 }
 
 button {
@@ -92,12 +71,12 @@ button {
   margin-top: 8px;
 }
 
-button.invalid {
-  cursor: not-allowed;
-}
-
-textarea {
-  border: 1px solid #e4dddd;
+.title {
+  display: inline-flex;
+  margin-top: 10px;
+  justify-content: center;
+  align-self: center;
+  width: 100%;
 }
 
 input:focus,

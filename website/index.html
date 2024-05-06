@@ -12,23 +12,27 @@
         <div class="header">
             <h1>Weather Journal App</h1>
         </div>
-        <form id="user-info">
-          <div class="zip">
+        <div class="input-form">
+          <p id="error"></p>
+          <form>
+            <div class="zip-code">
               <label for="zip">Enter Zipcode here</label>
-              <input type="text" id="zip" placeholder="Please enter zip code here" required>
-          </div>
-          <div class="feel">
-              <label for="feelings">How are you feeling today?</label>
-              <textarea class="myInput" id="feelings" placeholder="Please enter your feelings here" rows="5" cols="50" required></textarea>
-              <button id="generate" type="submit"> Generate </button>
-          </div>
-        </form>
-        <div class="entry">
-          <div class="title">Most Recent Entry</div>
-          <div id="entryHolder">
-              <div id="date"></div>
-              <div id="temp"></div>
-              <div id="content"></div>
+              <input type="text" id="zip" placeholder="Please enter zip code here">
+            </div>
+            <div class="feel-input">
+              <label for="feel">How are you feeling today?</label>
+              <textarea id="feel" placeholder="Please enter your feelings here" rows="6" cols="60"></textarea>
+            </div>
+          </form>
+          <button id="generate" type="submit"> Generate </button>
+        </div>
+        
+        <div class="weather-infor">
+          <div class="title">Weather information your location</div>
+          <div class="infor">
+            <div id="current-date"> </div>
+            <div id="temperature"></div>
+            <div id="user-response"></div>
           </div>
         </div>
       </div>

@@ -1,81 +1,93 @@
-const userInfo = document.getElementById('user-info');
 const generateBtn = document.getElementById('generate');
-generateBtn.addEventListener('click', performAction);
+const currentDateElement = document.getElementById('current-date');
+const temperatureElement = document.getElementById('temperature');
+const userResponseElement = document.getElementById('user-response');
 
-/* Function called by event listener */
-function performAction(e) {
-    e.preventDefault();
+currentDateElement.insertAdjacentHTML( 'beforeBegin', 'Current Date: ' )
+temperatureElement.insertAdjacentHTML( 'beforeBegin', 'Outside temperature: ' )
+userResponseElement.insertAdjacentHTML( 'beforeBegin', 'You are feeling about weather: ' )
 
-    //get user input
+generateBtn.addEventListener('click', submitAction);
+
+function submitAction(event) {
+  event.preventDefault();
     const zipCode = document.getElementById('zip').value;
-    const feel = document.getElementById('feelings').value;
-
-    const d = new Date();
-    const newDate = d.getMonth() + '.' + d.getDate() + '.' + d.getFullYear();
-
+    const userResponse = document.getElementById('feel').value;
     const apiUrl = 'https://api.openweathermap.org/data/2.5/weather';
     const apiKey = '2d38ed591bea4bd6371075900633fb91';
 
-    if (zipCode !== '') {
-        generateBtn.classList.remove('invalid');
-        getWeatherData(apiUrl, zipCode, apiKey)
-            .then((data) => {
-              postUserInfoData('/add', { temp: data.main.temp, date: newDate, feel: feel });
-            }).then(() => {
-              updateDynamicUI()
-            }).catch((error) => {
-                alert('Please try again enter difference zip code!');
-            });
-        userInfo.reset();
+    if (zipCode !== '' && userResponse !== '') {
+      getWeatherInforData(apiUrl, zipCode, apiKey, userResponse);
     } else {
-        generateBtn.classList.add('invalid');
+      showError('You are missing zip Code or feeling')
     }
 }
 
+const showError = (errorMessage = '') => {
+  const errorElement = document.getElementById('error');
+  errorElement.innerHTML = '';
+  if (errorMessage !== '') {
+    var text = document.createTextNode(errorMessage);
+    errorElement.appendChild(text);
+  }
+}
+
 /* GET method*/
-const getWeatherData = async(apiUrl, zipCode, apiKey) => {
-    const res = await fetch(`${apiUrl}?q=${zipCode}&appid=${apiKey}&units=imperial`);
-    try {
-        const data = await res.json();
-        return data;
-    } catch (error) {}
+const getWeatherInforData = async (apiUrl='', zipCode='', apiKey='', userResponse='') => {
+  const response = await fetch(`${apiUrl}?q=${zipCode}&appid=${apiKey}&units=imperial`);
+  try {
+    const newData = await response.json();
+    console.log(newData);
+    if (newData?.message) {
+      showError(`${newData.message}. Please try again enter difference zip code!!`)
+    } else {
+      showError('')
+      const temperature = newData?.main?.temp
+      postUserInfoData(userResponse, temperature);
+    }
+  } catch(error) {}
 };
 
 /* POST method */
-const postUserInfoData = async(url = '', data = {}) => {
-    const response = await fetch(url, {
-        method: 'POST',
-        credentials: 'same-origin',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            temp: data.temp,
-            date: data.date,
-            feel: data.feel
-        })
-    });
+const postUserInfoData = async (userResponse = '', temperature = '') => {
 
-    try {
-        const newData = await response.json();
-        return newData;
-    } catch (error) {
-        console.log(error);
-    }
+  const date = new Date();
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  const currentDate = `${day}-${month}-${year}`;
+
+  const parameter = {
+    method: 'POST',
+    credentials: 'same-origin',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      temperature: temperature,
+      date: currentDate,
+      userResponse: userResponse
+    })
+  }
+
+  const response = await fetch('/add', parameter);
+  try {
+    const weatherData = await response.json();
+    updateDynamicUI();
+    return weatherData;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-const updateDynamicUI = async() => {
-    const request = await fetch('/all');
-    try {
-        const allData = await request.json();
-        console.log(allData);
-        // update new entry values
-        if (allData.date !== undefined && allData.temp !== undefined && allData.feel !== undefined) {
-          document.getElementById('date').innerHTML = allData.date;
-          document.getElementById('temp').innerHTML = Math.round(allData.temp)+ ' degrees';
-          document.getElementById('content').innerHTML = allData.feel;
-        }
-    } catch (error) {
-        console.log('error', error);
+const updateDynamicUI = async () => {
+  const request = await fetch('/all');
+  try {
+    const weatherData = await request.json();
+    if (weatherData.date !== undefined && weatherData.temperature !== undefined && weatherData.userResponse !== undefined) {
+      document.getElementById('current-date').innerHTML = weatherData.date;
+      document.getElementById('temperature').innerHTML = Math.round(weatherData.temperature)+ ' degrees';
+      document.getElementById('user-response').innerHTML = weatherData.userResponse;
     }
+  } catch (error) {
+      console.log('error', error);
+  }
 };

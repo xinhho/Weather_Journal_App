@@ -15,9 +15,10 @@ app.use(express.static('website'));
 let projectData = {};
 // POST
 app.post('/add', (req, res) => {
-  projectData['temp'] = req.body.temp;
+  projectData['temperature'] = req.body.temperature;
   projectData['date'] = req.body.date;
-  projectData['feel'] = req.body.feel;
+  projectData['userResponse'] = req.body.userResponse;
+  console.log('projectData', projectData);
   res.send(projectData);
 });
 
